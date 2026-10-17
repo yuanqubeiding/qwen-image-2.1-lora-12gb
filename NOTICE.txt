@@ -1,8 +1,16 @@
 NOTICE
 ======
 
+This repository
+    Qwen-Image-2.1 LoRA on a 12 GB GPU and 32 GB of RAM
+    Copyright 2026 yuanqubeiding
+    https://github.com/yuanqubeiding/qwen-image-2.1-lora-12gb
+
 This repository contains documentation and scripts written for it. It does not
 vendor or redistribute any third-party source code, model weights, or datasets.
+
+Under the Apache License, Version 2.0, section 4(d), any distribution of this
+work or a derivative of it must include the attribution block above.
 
 Referenced projects
 -------------------

@@ -395,8 +395,13 @@ Third-party notices are in [NOTICE.txt](NOTICE.txt).
 Apache-2.0 is deliberately permissive. **Use it commercially, fork it, sell a
 course around it, embed it in a product.** No permission, no royalty. The only
 obligations are the standard Apache ones: keep the licence and notice files, and
-say what you changed. If you make money with it, a link back is appreciated but
-not required.
+say what you changed.
+
+**A credit is welcome, but it is a request, not a condition.** Apache-2.0 has no
+attribution requirement beyond carrying `LICENSE` and `NOTICE.txt` with any
+redistribution — teaching from this recipe or building a product on it does not
+require naming the author. If you want a ready-made citation, GitHub's "Cite this
+repository" button reads [CITATION.cff](CITATION.cff).
 
 ### The model's licence — not ours to relax
 
@@ -427,3 +432,8 @@ cannot grant commercial rights over weights we do not own. What the text says:
 
 This repository documents *how to train against* the model. It redistributes
 neither the weights nor any LoRA.
+
+**Unofficial.** This is an independent write-up. It is not affiliated with,
+sponsored by, or endorsed by Alibaba Group or Hangzhou Tongyi Laboratory. The
+model name in this repository's title is descriptive use, as permitted by
+§4(c) of the model licence.

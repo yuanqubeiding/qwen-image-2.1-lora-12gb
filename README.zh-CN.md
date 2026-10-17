@@ -334,7 +334,11 @@ bf16 需要约 66 GB，FP8 需要约 34 GB（差 2–3 GB），NF4 约 19 GB —
 
 **本仓库：Apache-2.0，可以商用。** 拿去卖课、嵌进产品、改了自己发，都不用问。
 唯一要做的只有 Apache 的例行公事：留着 LICENSE 和 NOTICE，说明你改了什么。
-赚到钱了愿意回链接最好，不回也不违约。
+
+**欢迎署名，但这是请求，不是条件。** Apache-2.0 除了「再分发时携带 LICENSE 和
+NOTICE.txt」之外，不要求任何署名——拿这个配方讲课、或者在产品里用它，不需要写作者
+名字。想直接引用的话，GitHub 的「Cite this repository」按钮读的是
+[CITATION.cff](CITATION.cff)。
 
 **下面这段限制来自 Qwen 的许可，不是我们的。** 我们不拥有那套权重，也就无权授权
 它的商用。许可原文是这么写的：
@@ -357,6 +361,9 @@ bf16 需要约 66 GB，FP8 需要约 34 GB（差 2–3 GB），NF4 约 19 GB —
 
 本仓库只记录*怎么训练*，不分发权重，也不分发任何 LoRA。
 
+**非官方项目。** 这是一份独立记录，与阿里巴巴集团、杭州通义实验室无隶属关系，
+未获其赞助或背书。仓库标题里的模型名属于许可 §4(c) 允许的描述性使用。
+
 ---
 
 ## 文件索引
@@ -366,6 +373,7 @@ bf16 需要约 66 GB，FP8 需要约 34 GB（差 2–3 GB），NF4 约 19 GB —
 | [SKILL.md](SKILL.md) | 给 AI 助手读的版本 |
 | [PROVENANCE.md](PROVENANCE.md) | 数据来源：两次运行、测量方法、哪些是实测哪些是推算 |
 | [NOTICE.txt](NOTICE.txt) | 第三方署名 |
+| [CITATION.cff](CITATION.cff) | 引用信息（GitHub 的「Cite this repository」按钮读它） |
 | [scripts/measure.py](scripts/measure.py) | 峰值采样器（跑任何命令都行） |
 | [references/setup.md](references/setup.md) | 环境、依赖、验证命令 |
 | [references/manual-cli.md](references/manual-cli.md) | 命令行逐参数说明 |

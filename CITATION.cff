@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this recipe or build on these measurements, please cite it as below."
+title: "Qwen-Image-2.1 LoRA on a 12 GB GPU and 32 GB of RAM"
+abstract: >-
+  A measured, reproducible recipe for training a style LoRA for a 20B-class
+  diffusion transformer on a consumer laptop: 11.94 GB VRAM and 31.7 GB RAM,
+  NF4 quantisation, CPU offload disabled. Includes peak memory measurements,
+  the resolution-triggered stall investigation, and two independent loss curves.
+authors:
+  - alias: "yuanqubeiding"
+    family-names: "yuanqubeiding"
+    website: "https://github.com/yuanqubeiding"
+type: software
+license: Apache-2.0
+repository-code: "https://github.com/yuanqubeiding/qwen-image-2.1-lora-12gb"
+version: 1.0.0
+date-released: 2026-10-18

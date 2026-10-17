@@ -6,6 +6,7 @@
 *.txt  text eol=lf
 *.json text eol=lf
 *.csv  text eol=lf
+*.cff  text eol=lf
 
 .gitignore     text eol=lf
 .gitattributes text eol=lf
