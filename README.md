@@ -9,6 +9,9 @@ Train a style LoRA for a 20B-class diffusion model on a single consumer laptop.
 commercially — no permission needed. The Qwen-Image-2.1 weights are **not**, and
 that limit is not ours to relax: see [Licensing](#licensing).
 
+**Unofficial.** Independent write-up, not affiliated with or endorsed by Alibaba
+Group or Hangzhou Tongyi Laboratory.
+
 This recipe targets a machine that is short in **both** directions: 11.94 GB of
 VRAM and 31.7 GB of system RAM. That pairing is the point. It is exactly the
 configuration where `--enable_model_cpu_offload` looks like the answer and is in
