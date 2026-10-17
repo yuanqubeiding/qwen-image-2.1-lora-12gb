@@ -61,8 +61,8 @@ console logs of actual runs.
 
 **Derived, not measured.** The claim that CPU offload peaks at roughly **2× the
 model size**, and therefore the "offload needs ~66 GB" row in the bf16 table.
-This follows from `pin_memory()` copying every parameter while the original
-allocation is still alive. It is an inference from the allocator's behaviour —
+This follows from the pinned arena copying every non-trainable parameter while the
+original allocation is still alive. It is an inference from the allocator's behaviour —
 **a full offload run was never completed on this machine**. Offload runs out of
 RAM during model load, which is the subject of the recipe, so it could not be
 observed to completion.

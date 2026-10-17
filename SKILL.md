@@ -1,6 +1,6 @@
 ---
 name: qwen-image-2.1-lora
-description: Train a Qwen-Image-2.1 LoRA on a 12-24 GB consumer GPU with 32 GB+ RAM. Use when the user mentions "Qwen-Image-2.1 LoRA", "Qwen LoRA 训练", "low VRAM LoRA training", "OOM 训练", "跑不动 LoRA", "DiffSynth Qwen training", or asks how to fine-tune a large diffusion transformer with limited VRAM. Core idea: quantize to NF4 and keep weights resident in VRAM — do NOT use CPU offload unless the machine has plenty of system RAM, because offload trades a VRAM problem for a RAM problem (pin_memory copies every parameter, peak ~2x model size). Also covers resolution-triggered training stalls and loading the PEFT checkpoint into ComfyUI.
+description: Train a Qwen-Image-2.1 LoRA on a 12-24 GB consumer GPU with 32 GB+ RAM. Use when the user mentions "Qwen-Image-2.1 LoRA", "Qwen LoRA 训练", "low VRAM LoRA training", "OOM 训练", "跑不动 LoRA", "DiffSynth Qwen training", or asks how to fine-tune a large diffusion transformer with limited VRAM. Core idea: quantize to NF4 and keep weights resident in VRAM — do NOT use CPU offload unless the machine has plenty of system RAM, because offload trades a VRAM problem for a RAM problem (a pinned copy of every frozen parameter, peak ~2x model size). Also covers resolution-triggered training stalls and loading the PEFT checkpoint into ComfyUI.
 ---
 
 # Qwen-Image-2.1 LoRA
@@ -29,11 +29,14 @@ is the case this recipe is built for.
 | Checkpoint won't load in ComfyUI | rename the keys | **do not rename** |
 | CLI re-downloads 31 GB, GPU idle at 1% | wait it out | export `DIFFSYNTH_MODEL_BASE_PATH` to the existing cache |
 
-Why: CPU offload creates a `pin_memory()` copy of **every parameter**. Pinned pages
-are non-pageable, so the page file cannot absorb them, and peak usage becomes
-roughly **2× the model size**. A bf16 run needs ~66 GB of physical RAM. NF4 needs
-~19 GB. On a machine with both low VRAM and low RAM, offload converts a VRAM
-problem into a worse RAM problem.
+Why: CPU offload keeps the weights in host RAM and moves one unit at a time to the
+GPU. Those host-resident weights must be pinned, so the manager allocates a pinned
+copy of **every frozen (non-trainable) parameter** while the originals are still
+alive. Pinned pages are non-pageable, so the page file cannot absorb them, and peak
+usage becomes roughly **2× the model size**. A bf16 run needs ~66 GB of physical
+RAM. NF4 needs ~19 GB. On a machine with both low VRAM and low RAM, offload
+converts a VRAM problem into a worse RAM problem. (The 2× figure is derived from
+the allocator; a full offload run was never completed here — see PROVENANCE.md.)
 
 **Caveat:** on a machine with 64 GB+ RAM, CPU offload is a valid strategy (slower,
 but it works). Do not tell a well-resourced user to avoid it — the reason it is

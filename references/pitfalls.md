@@ -24,13 +24,19 @@ problem.
 ### Mechanism
 
 1. With `--enable_model_cpu_offload`, `train.py` sets the device to `"cpu"`, so the
-   weights are loaded into host RAM first.
-2. `OffloadTrainingManager` then creates a `pin_memory()` copy for **every
-   parameter** (`diffsynth/core/offload_training/offloader.py:26`).
+   weights are loaded into host RAM first. Offload means the model stays in RAM and
+   only the unit currently executing sits on the GPU — so host RAM has to hold a
+   full copy for the whole run.
+2. `OffloadTrainingManager` allocates a pinned arena sized to every
+   **non-trainable** parameter and buffer
+   (`diffsynth/core/offload_training/memory_buffer.py:99`) and copies them into it
+   (`offloader.py:26`). Trainable parameters stay on the GPU; in LoRA training the
+   DiT is frozen, so that is effectively the whole transformer.
 3. Pinned pages are **page-locked**: the OS may not swap them out. A page file is
    therefore irrelevant here — only physical RAM counts.
 4. The copy is a **second allocation** while the original tensor is still alive.
-   Peak usage is roughly **2× the model size**.
+   Peak usage is roughly **2× the model size** — derived from the allocator's
+   behaviour, not observed to completion (see PROVENANCE.md).
 
 ### The arithmetic
 

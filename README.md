@@ -20,7 +20,7 @@ and keep them there.
 |---|---|---|
 | Not enough VRAM | move weights to CPU (`--enable_model_cpu_offload`) | shrink weights until they fit (NF4) |
 | Assumes | plenty of host RAM | **nothing** — a low-VRAM machine usually has low RAM too |
-| What actually happens | `pin_memory()` copies the model a second time → host OOM | no second copy is made |
+| What actually happens | a pinned second copy of the model → host OOM | no second copy is made |
 | VRAM | freed up | **11.7 GB of 12.2 GB (95.6%)** |
 | Speed | data shuttled from CPU every step | 1.31–1.38 s/step |
 
@@ -230,16 +230,32 @@ different question — judge that by looking at images, not by the loss value.
 
 ## Four findings
 
-### 1. CPU offload doubles the model in locked pages
+### 1. CPU offload keeps a second, locked copy of the model in RAM
 
-With `--enable_model_cpu_offload`, `train.py` sets the device to `"cpu"` and the
-weights land in host RAM first. `OffloadTrainingManager` then creates a
-`pin_memory()` copy for **every parameter**
-(`diffsynth/core/offload_training/offloader.py:26`).
+**What offload actually is.** Not "use RAM as extra VRAM". Host RAM holds a
+full copy of the non-trainable weights; the GPU holds only the unit currently
+executing, and units are moved back and forth as the forward pass walks the
+model. That is why RAM, not VRAM, becomes the binding constraint.
 
-Pinned pages are **non-pageable**, so a 96.8 GB page file is useless here — only
-physical RAM counts. The copy is a second allocation while the original is still
-alive, so peak usage is roughly **2× the model size**.
+**Why a second copy is needed.** Host-resident weights have to be *pinned*:
+CUDA's asynchronous host→device copies read memory the OS has promised not to
+move. So `OffloadTrainingManager` allocates a pinned arena sized to every
+**non-trainable** parameter and buffer
+(`diffsynth/core/offload_training/memory_buffer.py:99`) and copies them into it
+(`offloader.py:26`). In LoRA training the DiT is frozen, so that is effectively
+the whole transformer.
+
+Pinned pages are **non-pageable** — a 96.8 GB page file is useless here, only
+physical RAM counts. The pinned copy is a second allocation while the originals
+are still alive, so peak usage is roughly **2× the model size**. Offload runs
+out of RAM during model load on this machine, so the 2× figure is derived from
+the allocation path rather than observed to completion — see PROVENANCE.md.
+
+**The measured run did not offload.** `enable_model_cpu_offload` was `false` and
+the NF4 weights stayed resident in VRAM. The 28.7 GB RAM peak in the table below
+is *loading*, not offload: weights are read from disk, quantised, copied to
+VRAM, and the temporary buffer is released — which is why RSS falls back to
+12.2 GB once loading finishes.
 
 | Precision | Weights | Offload needs (~2×) | Physical RAM available |
 |---|---|---|---|
