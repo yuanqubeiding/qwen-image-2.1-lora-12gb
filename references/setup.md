@@ -215,7 +215,7 @@ in any bug report.
 
 | | |
 |---|---|
-| GPU | 12 GB laptop GPU — 11.94 GB usable, sm_120 (Blackwell) |
+| GPU | RTX 5070 Ti Laptop, 11.94 GB VRAM, sm_120 (Blackwell) |
 | RAM | 31.7 GB |
 | Page file | 96.8 GB commit limit |
 

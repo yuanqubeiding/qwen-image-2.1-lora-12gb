@@ -7,9 +7,10 @@ description: Train a Qwen-Image-2.1 LoRA on a 12-24 GB consumer GPU with 32 GB+ 
 
 Train a style or character LoRA for a 20B-class DiT on 12 GB of VRAM and 32 GB of RAM.
 
-**Verified twice:** 500 steps in **12 min 05 s** on an 11.94 GB laptop GPU with
-31.7 GB RAM. Peak 11,691 / 12,227 MB VRAM and 28,700 / 32,485 MB system RAM —
-both peaks land in the **first 25 seconds**, during model load, then settle.
+**Verified twice:** 500 steps in **12 min 05 s** on an RTX 5070 Ti Laptop
+(11.94 GB VRAM) with 31.7 GB RAM. Peak 11,691 / 12,227 MB VRAM and
+28,700 / 32,485 MB system RAM — both peaks land in the **first 25 seconds**,
+during model load, then settle.
 
 The constraint is the *pair*. A low-VRAM machine usually also has low RAM, and that
 is the case this recipe is built for.

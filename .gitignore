@@ -1,3 +1,15 @@
+# ===== Sensitive — must never enter version history =====
+.env
+.env.*
+config.yaml
+*.key
+*.pem
+credentials.json
+.claude/
+.dsh/
+.harness/
+.npm-cache/
+
 # Model weights — never commit these
 *.safetensors
 *.ckpt

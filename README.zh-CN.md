@@ -79,7 +79,7 @@ Qwen-Image-2.1 是 20B 级别的 DiT，加上 text encoder 和 VAE，bf16 权重
 
 | 项 | 版本 |
 |---|---|
-| GPU | 12 GB 笔记本显卡（11.94 GB 可用，sm_120 / Blackwell） |
+| GPU | RTX 5070 Ti Laptop，11.94 GB 显存，sm_120（Blackwell） |
 | 内存 | 31.7 GB |
 | Python | 3.11.0 |
 | torch | 2.10.0+cu130 |
@@ -328,9 +328,18 @@ bf16 需要约 66 GB，FP8 需要约 34 GB（差 2–3 GB），NF4 约 19 GB —
 | Qwen-Image-2.1 权重 | Qwen Research License（非商用） |
 
 本仓库的文本和脚本以 Apache-2.0 发布，见 [LICENSE](LICENSE)。
+第三方署名见 [NOTICE.txt](NOTICE.txt)。
 
-**注意**：底模权重是非商用许可。发布用这个配方训练出来的 LoRA 之前，
-先读一遍 Qwen-Image-2.1 的许可条款。
+**底模不是 Apache-2.0。** Qwen-Image-2.1 的许可对"训练出来的东西"有三条硬约束：
+
+1. **只能非商用。** 权重、用权重训出的 LoRA、以及由它们派生的模型，商业使用需要
+   单独向 Tongyi 申请许可。
+2. **发布 LoRA 要在文档里署名。** §4(b)：训练或微调出模型并分发时，产品文档要写
+   "Built with Qwen" 或 "Improved using Qwen"。
+3. **"Qwen" 不能当衍生产品的主名称。** §4(c)。描述性用法（如"Qwen-Image-2.1 的
+   LoRA"）是明确允许的。
+
+本仓库只记录*怎么训练*，不分发权重，也不分发任何 LoRA。
 
 ---
 
@@ -339,6 +348,8 @@ bf16 需要约 66 GB，FP8 需要约 34 GB（差 2–3 GB），NF4 约 19 GB —
 | 文件 | 内容 |
 |---|---|
 | [SKILL.md](SKILL.md) | 给 AI 助手读的版本 |
+| [PROVENANCE.md](PROVENANCE.md) | 数据来源：两次运行、测量方法、哪些是实测哪些是推算 |
+| [NOTICE.txt](NOTICE.txt) | 第三方署名 |
 | [scripts/measure.py](scripts/measure.py) | 峰值采样器（跑任何命令都行） |
 | [references/setup.md](references/setup.md) | 环境、依赖、验证命令 |
 | [references/manual-cli.md](references/manual-cli.md) | 命令行逐参数说明 |

@@ -49,7 +49,7 @@ and keep them there.
 
 | | |
 |---|---|
-| GPU | 12 GB laptop GPU — 11.94 GB usable, sm_120 (Blackwell) |
+| GPU | RTX 5070 Ti Laptop, 11.94 GB VRAM, sm_120 (Blackwell) |
 | System RAM | 31.7 GB |
 | Python | 3.11.0 (requires ≥ 3.10.1) |
 | torch | 2.10.0+cu130 |
@@ -376,12 +376,29 @@ python scripts/measure.py --out ./run -- python train.py --your --args
 
 ---
 
-## Attribution
+## Licensing
 
-- [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio) — Apache-2.0
-- [DiffSynth-WebUI](https://github.com/modelscope/DiffSynth-WebUI) — Apache-2.0
-- [ComfyUI](https://github.com/comfyanonymous/ComfyUI) — GPL-3.0; referenced by
-  file and line only, no source is vendored here
-- Qwen-Image-2.1 — [Qwen Research License Agreement](https://huggingface.co/Qwen/Qwen-Image-2.1).
-  This repository documents *how to train against* the model; it does not
-  redistribute the model or any derivative weights.
+| Component | Licence |
+|---|---|
+| This repository (text + scripts) | Apache-2.0 — [LICENSE](LICENSE) |
+| [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio) | Apache-2.0 |
+| [DiffSynth-WebUI](https://github.com/modelscope/DiffSynth-WebUI) | Apache-2.0 |
+| [ComfyUI](https://github.com/comfyanonymous/ComfyUI) | GPL-3.0 — cited by file and line only, no source vendored |
+| [Qwen-Image-2.1](https://modelscope.cn/models/Qwen/Qwen-Image-2.1) | Qwen Research License — **non-commercial** |
+
+Third-party notices are in [NOTICE.txt](NOTICE.txt).
+
+**The base model is not Apache-2.0.** Its licence restricts what you may do with
+anything trained from it:
+
+1. **Non-commercial only.** The weights, any LoRA trained from them, and any
+   model derived from them need a separate licence for commercial use.
+2. **Publishing a trained LoRA requires a notice.** §4(b): if you train or
+   fine-tune a model and distribute it, the product documentation must say
+   "Built with Qwen" or "Improved using Qwen".
+3. **"Qwen" may not be the primary name.** §4(c): do not name a derivative work
+   or product "Qwen". Descriptive use — "a LoRA for Qwen-Image-2.1" — is
+   explicitly permitted.
+
+This repository documents *how to train against* the model. It redistributes
+neither the weights nor any LoRA.
