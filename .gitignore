@@ -23,6 +23,25 @@ datasets/
 outputs/
 models/
 
+# Upstream clones, if the setup script or a manual clone runs in the repo root
+diffsynth/
+DiffSynth-Studio/
+DiffSynth-WebUI/
+
+# measure.py output directories
+run/
+runs/
+
+# Never commit a packaged copy of this repository
+*.zip
+
+# Dataset files dropped at the repo root (bypass the data/ directory rule)
+*.jsonl
+*.jpg
+*.jpeg
+*.png
+*.webp
+
 # Logs
 *.log
 
