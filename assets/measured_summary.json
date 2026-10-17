@@ -1,0 +1,20 @@
+{
+  "exit_code": 0,
+  "duration_s": 724.7,
+  "duration_hms": "12:04",
+  "samples": 355,
+  "interval_s": 2.0,
+  "baseline_gpu_mb": 543,
+  "baseline_ram_used_mb": 8945.9,
+  "baseline_pagefile_used_mb": 1178.9,
+  "peak_train_process_rss_mb": 20444.0,
+  "peak_system_ram_used_mb": 28700.2,
+  "peak_system_ram_used_gb": 28.03,
+  "min_ram_available_mb": 3785.2,
+  "peak_pagefile_used_mb": 1188.5,
+  "peak_pagefile_used_gb": 1.16,
+  "peak_gpu_used_mb": 11691,
+  "peak_gpu_delta_mb": 11148,
+  "total_ram_mb": 32485.4,
+  "total_ram_gb": 31.72
+}

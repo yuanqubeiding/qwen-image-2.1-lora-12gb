@@ -1,0 +1,36 @@
+# Model weights — never commit these
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.bin
+
+# Datasets, training outputs, downloaded models
+data/
+datasets/
+outputs/
+models/
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node
+node_modules/
+.next/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keep the sanitized config and the measured data
+!assets/training_args.json
+!assets/loss.csv
+!assets/measured_summary.json
+!assets/measured_resources.csv
+!assets/measured_loss.csv
