@@ -2,6 +2,8 @@
 
 **核心结论：不要用 CPU offload。用量化。**
 
+**许可：Apache-2.0 —— 可商用，不用打招呼。**
+
 这是一份实测记录 + 可复现配置。不是理论推导，是在一台 **12 GB 显存 / 31.7 GB 内存**
 的机器上，用 10 张图跑了 500 步、拿到可用的 LoRA 之后的完整记录。
 
@@ -320,18 +322,22 @@ bf16 需要约 66 GB，FP8 需要约 34 GB（差 2–3 GB），NF4 约 19 GB —
 
 ## 引用与许可
 
-| 组件 | 许可 |
-|---|---|
-| DiffSynth-Studio | Apache-2.0 |
-| DiffSynth-WebUI | Apache-2.0 |
-| ComfyUI | GPL-3.0 |
-| Qwen-Image-2.1 权重 | Qwen Research License（仅限研究/评估） |
+| 组件 | 许可 | 可商用 |
+|---|---|---|
+| **本仓库**（文本 + 脚本） | **Apache-2.0**，见 [LICENSE](LICENSE) | **可以，不用问** |
+| DiffSynth-Studio | Apache-2.0 | 可以 |
+| DiffSynth-WebUI | Apache-2.0 | 可以 |
+| ComfyUI | GPL-3.0（仅按 file:line 引用，未收录源码） | 按 GPL-3.0 |
+| Qwen-Image-2.1 权重 | Qwen Research License | **不可以，需单独许可** |
 
-本仓库的文本和脚本以 Apache-2.0 发布，见 [LICENSE](LICENSE)。
 第三方署名见 [NOTICE.txt](NOTICE.txt)。
 
-**底模不是 Apache-2.0，而且「能不能商用」的答案很明确：不能。** 要商用必须单独
-向 Tongyi 买许可。许可原文是这么写的：
+**本仓库：Apache-2.0，可以商用。** 拿去卖课、嵌进产品、改了自己发，都不用问。
+唯一要做的只有 Apache 的例行公事：留着 LICENSE 和 NOTICE，说明你改了什么。
+赚到钱了愿意回链接最好，不回也不违约。
+
+**下面这段限制来自 Qwen 的许可，不是我们的。** 我们不拥有那套权重，也就无权授权
+它的商用。许可原文是这么写的：
 
 1. **授权范围只有「研究或评估」。** §1(i) 把 "Non-Commercial" 定义成
    "for research or evaluation purposes only" —— **比日常说的「非商用」更窄**。

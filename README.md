@@ -3,6 +3,8 @@
 Train a style LoRA for a 20B-class diffusion model on a single consumer laptop.
 **No CPU offload. No multi-GPU. 500 steps in 12 min 05 s.**
 
+**Licence: Apache-2.0 — commercial use welcome, no permission needed.**
+
 This recipe targets a machine that is short in **both** directions: 11.94 GB of
 VRAM and 31.7 GB of system RAM. That pairing is the point. It is exactly the
 configuration where `--enable_model_cpu_offload` looks like the answer and is in
@@ -378,19 +380,28 @@ python scripts/measure.py --out ./run -- python train.py --your --args
 
 ## Licensing
 
-| Component | Licence |
-|---|---|
-| This repository (text + scripts) | Apache-2.0 — [LICENSE](LICENSE) |
-| [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio) | Apache-2.0 |
-| [DiffSynth-WebUI](https://github.com/modelscope/DiffSynth-WebUI) | Apache-2.0 |
-| [ComfyUI](https://github.com/comfyanonymous/ComfyUI) | GPL-3.0 — cited by file and line only, no source vendored |
-| [Qwen-Image-2.1](https://modelscope.cn/models/Qwen/Qwen-Image-2.1) | Qwen Research License — **research or evaluation only** |
+| Component | Licence | Commercial use |
+|---|---|---|
+| **This repository** (text + scripts) | **Apache-2.0** — [LICENSE](LICENSE) | **yes, no permission needed** |
+| [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio) | Apache-2.0 | yes |
+| [DiffSynth-WebUI](https://github.com/modelscope/DiffSynth-WebUI) | Apache-2.0 | yes |
+| [ComfyUI](https://github.com/comfyanonymous/ComfyUI) | GPL-3.0 — cited by file and line only, no source vendored | governed by GPL-3.0 |
+| [Qwen-Image-2.1](https://modelscope.cn/models/Qwen/Qwen-Image-2.1) | Qwen Research License | **no — separate licence required** |
 
 Third-party notices are in [NOTICE.txt](NOTICE.txt).
 
-**The base model is not Apache-2.0, and the plain answer to "can I use this
-commercially" is no.** A separate licence from Tongyi is required. What the text
-actually says:
+### This repository
+
+Apache-2.0 is deliberately permissive. **Use it commercially, fork it, sell a
+course around it, embed it in a product.** No permission, no royalty. The only
+obligations are the standard Apache ones: keep the licence and notice files, and
+say what you changed. If you make money with it, a link back is appreciated but
+not required.
+
+### The model's licence — not ours to relax
+
+The restriction below comes from Qwen's licence, not from this repository. We
+cannot grant commercial rights over weights we do not own. What the text says:
 
 1. **The grant covers research or evaluation only.** §1(i) defines
    "Non-Commercial" as "for research or evaluation purposes only" — narrower than
