@@ -34,5 +34,5 @@ Qwen-Image-2.1 (model weights)
     the notice above whenever the materials or their derivatives are
     redistributed; it is reproduced here so that anyone following this recipe
     can carry it forward. See README.md, "Licensing", for the accompanying
-    restrictions (non-commercial use, the "Built with Qwen" notice, and the
-    naming rule).
+    restrictions: research or evaluation use only (commercial use requires a
+    separate licence), the "Built with Qwen" notice, and the naming rule.

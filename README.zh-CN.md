@@ -325,18 +325,28 @@ bf16 需要约 66 GB，FP8 需要约 34 GB（差 2–3 GB），NF4 约 19 GB —
 | DiffSynth-Studio | Apache-2.0 |
 | DiffSynth-WebUI | Apache-2.0 |
 | ComfyUI | GPL-3.0 |
-| Qwen-Image-2.1 权重 | Qwen Research License（非商用） |
+| Qwen-Image-2.1 权重 | Qwen Research License（仅限研究/评估） |
 
 本仓库的文本和脚本以 Apache-2.0 发布，见 [LICENSE](LICENSE)。
 第三方署名见 [NOTICE.txt](NOTICE.txt)。
 
-**底模不是 Apache-2.0。** Qwen-Image-2.1 的许可对"训练出来的东西"有三条硬约束：
+**底模不是 Apache-2.0，而且「能不能商用」的答案很明确：不能。** 要商用必须单独
+向 Tongyi 买许可。许可原文是这么写的：
 
-1. **只能非商用。** 权重、用权重训出的 LoRA、以及由它们派生的模型，商业使用需要
-   单独向 Tongyi 申请许可。
-2. **发布 LoRA 要在文档里署名。** §4(b)：训练或微调出模型并分发时，产品文档要写
-   "Built with Qwen" 或 "Improved using Qwen"。
-3. **"Qwen" 不能当衍生产品的主名称。** §4(c)。描述性用法（如"Qwen-Image-2.1 的
+1. **授权范围只有「研究或评估」。** §1(i) 把 "Non-Commercial" 定义成
+   "for research or evaluation purposes only" —— **比日常说的「非商用」更窄**。
+   §2(a) 授予的使用、复制、分发、创作衍生作品、修改，全部限定在这个范围内。
+   §2(b)：任何商业用途都要单独许可，申请地址 model-business@notice.qwencloud.com。
+2. **你训出来的东西继承这个限制。** §5(a) 说你对自己创作的衍生作品享有所有权，
+   但前提是 "conditioned upon compliance"——遵循本协议。所以用这套权重训出的
+   LoRA 同样只能用于研究/评估；卖它、或者放进商业产品，需要商业许可。
+3. **生成图片没有被单独豁免。** 协议里没有任何一条把输出物的权利授予你；出图属于
+   "use of the Materials"，而这项授权只覆盖研究/评估。**不要把生成结果当成不受
+   限制**——保守做法是同样按研究/评估对待。
+4. **分发训好的模型要署名。** §4(b)：训练或微调出模型并分发时，产品文档要写
+   "Built with Qwen" 或 "Improved using Qwen"。**免费分发（研究/评估用途）是允许的**
+   （§3 允许再分发），商业使用不允许。
+5. **"Qwen" 不能当衍生产品的主名称。** §4(c)。描述性用法（如"Qwen-Image-2.1 的
    LoRA"）是明确允许的。
 
 本仓库只记录*怎么训练*，不分发权重，也不分发任何 LoRA。

@@ -384,19 +384,33 @@ python scripts/measure.py --out ./run -- python train.py --your --args
 | [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio) | Apache-2.0 |
 | [DiffSynth-WebUI](https://github.com/modelscope/DiffSynth-WebUI) | Apache-2.0 |
 | [ComfyUI](https://github.com/comfyanonymous/ComfyUI) | GPL-3.0 — cited by file and line only, no source vendored |
-| [Qwen-Image-2.1](https://modelscope.cn/models/Qwen/Qwen-Image-2.1) | Qwen Research License — **non-commercial** |
+| [Qwen-Image-2.1](https://modelscope.cn/models/Qwen/Qwen-Image-2.1) | Qwen Research License — **research or evaluation only** |
 
 Third-party notices are in [NOTICE.txt](NOTICE.txt).
 
-**The base model is not Apache-2.0.** Its licence restricts what you may do with
-anything trained from it:
+**The base model is not Apache-2.0, and the plain answer to "can I use this
+commercially" is no.** A separate licence from Tongyi is required. What the text
+actually says:
 
-1. **Non-commercial only.** The weights, any LoRA trained from them, and any
-   model derived from them need a separate licence for commercial use.
-2. **Publishing a trained LoRA requires a notice.** §4(b): if you train or
+1. **The grant covers research or evaluation only.** §1(i) defines
+   "Non-Commercial" as "for research or evaluation purposes only" — narrower than
+   the everyday meaning of the phrase. Section §2(a) grants use, reproduction,
+   distribution, derivative works and modification *within that limit*. §2(b):
+   any commercial use requires a separate licence, requested from
+   model-business@notice.qwencloud.com.
+2. **Anything you train inherits the limit.** §5(a) says you own the derivative
+   works you create — but only "conditioned upon compliance" with this agreement.
+   A LoRA trained from these weights is under the same restriction. Selling it,
+   or shipping it in a commercial product, needs the commercial licence.
+3. **Generated images are not carved out.** There is no clause granting you
+   separate rights to outputs. Generating an image is "use of the Materials",
+   which is granted only for research or evaluation. Do not assume outputs are
+   exempt — treat them the same way.
+4. **Publishing a trained model carries a notice.** §4(b): if you train or
    fine-tune a model and distribute it, the product documentation must say
-   "Built with Qwen" or "Improved using Qwen".
-3. **"Qwen" may not be the primary name.** §4(c): do not name a derivative work
+   "Built with Qwen" or "Improved using Qwen". Free redistribution for research
+   or evaluation is permitted (§3); commercial use is not.
+5. **"Qwen" may not be the primary name.** §4(c): do not name a derivative work
    or product "Qwen". Descriptive use — "a LoRA for Qwen-Image-2.1" — is
    explicitly permitted.
 
