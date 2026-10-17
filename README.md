@@ -1,9 +1,13 @@
+**English** · [简体中文](README.zh-CN.md)
+
 # Qwen-Image-2.1 LoRA on a 12 GB GPU and 32 GB of RAM
 
 Train a style LoRA for a 20B-class diffusion model on a single consumer laptop.
-**No CPU offload. No multi-GPU. 500 steps in 12 min 05 s.**
+**No CPU offload. No multi-GPU. 500 steps in 12 min 04.7 s.**
 
-**Licence: Apache-2.0 — commercial use welcome, no permission needed.**
+**Licence: Apache-2.0.** This write-up and its scripts are free to use
+commercially — no permission needed. The Qwen-Image-2.1 weights are **not**, and
+that limit is not ours to relax: see [Licensing](#licensing).
 
 This recipe targets a machine that is short in **both** directions: 11.94 GB of
 VRAM and 31.7 GB of system RAM. That pairing is the point. It is exactly the
@@ -71,25 +75,21 @@ Pinning these is not optional. Without them the run is not reproducible.
 | Requirement | Version | Notes |
 |---|---|---|
 | Python | 3.11 | 3.10.1 minimum |
-| Node.js | ≥ 20 | the WebUI frontend is built with it |
+| Node.js | ≥ 20 | **WebUI path only** — the frontend is a Next.js app |
 | Git | any | |
 | NVIDIA driver | CUDA 13.0 capable | otherwise `torch.cuda.is_available()` returns `False` |
 
 The CUDA Toolkit itself is **not** required — torch ships its own runtime.
 
-### Clone and install
+### Two paths
 
-```bash
-git clone --recurse-submodules https://github.com/modelscope/DiffSynth-WebUI.git
-cd DiffSynth-WebUI
-pip install -e DiffSynth-Studio/
-pip install -e .
-```
+Pick one. **The command-line path does not need Node.js**, and it is the only path
+that also works on a rented cloud GPU.
 
-Two things that will bite you:
+Two things will bite you on either path:
 
-1. **`--recurse-submodules` is required.** `DiffSynth-Studio/` inside the repo is a
-   submodule. Clone without the flag and it is an empty directory.
+1. **`--recurse-submodules` is required.** `DiffSynth-Studio/` inside the WebUI
+   repo is a submodule. Clone without the flag and it is an empty directory.
 2. **`bitsandbytes` is not a default dependency.** It lives in the `quant` optional
    group alongside `comfy-kitchen`, `entropack[cuda13]` and `torchao`. Install only
    what you need:
@@ -100,6 +100,44 @@ pip install bitsandbytes --no-deps
 
 **`--no-deps` is mandatory.** Without it, pip may pull a different torch build and
 silently break the CUDA 13 environment.
+
+#### A. Command line (recommended)
+
+```bash
+git clone --recurse-submodules https://github.com/modelscope/DiffSynth-Studio.git
+cd DiffSynth-Studio
+pip install -e .
+pip install bitsandbytes --no-deps
+```
+
+Or run the setup script — it clones, installs, downloads the 31 GB of weights and
+verifies the result:
+
+```bash
+bash scripts/setup.sh
+```
+
+#### B. WebUI (graphical)
+
+```bash
+git clone --recurse-submodules https://github.com/modelscope/DiffSynth-WebUI.git
+cd DiffSynth-WebUI
+pip install -e DiffSynth-Studio/
+pip install -e .
+pip install bitsandbytes --no-deps
+```
+
+To launch:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\training_ui\launch_windows.ps1
+```
+
+Open `http://127.0.0.1:8100/dashboard`. The first start compiles the frontend and
+can take a few minutes. Training runs in a separate process — closing the browser
+does not stop it.
+
+Click-by-click paths: `references/manual-webui.md`.
 
 ### Model weights
 
@@ -132,16 +170,6 @@ export DIFFSYNTH_MODEL_BASE_PATH=./models
 Reserve **50 GB**: 31 GB of weights, ~10 GB of dependencies, plus 5 × 167 MB
 checkpoints and logs.
 
-### Launch (Windows)
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\training_ui\launch_windows.ps1
-```
-
-Open `http://127.0.0.1:8100/dashboard`.
-
-Training runs in a separate process — closing the browser does not stop it.
-
 ### Verify before training
 
 ```bash
@@ -152,7 +180,7 @@ python -c "import bitsandbytes; print(bitsandbytes.__version__)"
 # expect: 0.50.2
 
 node -v
-# expect: v20 or newer
+# WebUI path only. expect: v20 or newer
 ```
 
 ---
